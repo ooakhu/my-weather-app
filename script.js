@@ -15,7 +15,7 @@ const returnLocation = async ( position ) => {
     const crd = position.coords;
     let lat = crd.latitude
     let lon = crd.longitude
-    const mykey = "a16f7598edb1c643690ff19c18310e0b"
+    const mykey = ""
     const config = {
         params: {
             lat: lat,
