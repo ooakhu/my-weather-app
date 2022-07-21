@@ -11,29 +11,20 @@ function error ( err ) {
     console.warn( `ERROR(${err.code}): ${err.message}` );
 }
 
-const returnLocation = async ( position ) => {
-    const crd = position.coords;
-    let lat = crd.latitude
-    let lon = crd.longitude
-    const mykey = ""
-    const config = {
-        params: {
-            lat: lat,
-            lon: lon,
-            appid: mykey
-        }
-    }
-    let information = await axios.get( baseUrl, config )
-    console.log( lat, lon )
-}
-function test () {
-    navigator.geolocation.getCurrentPosition( returnLocation, error, options );
+const getWeather =  () => {
+    navigator.geolocation.getCurrentPosition (async ( success ) => {
+        console.log( success.coords.latitude )
+        console.log( success.coords.longitude )
+        let lat = success.coords.latitude
+        let lon = success.coords.longitude
+        let data = await axios.get( `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid={}` )
+        console.log(data.data)
+
+    } )
 }
 
-button.addEventListener( "click", function ( e ) {
+.window.addEventListener( "load", function ( e ) {
     e.preventDefault()
-    test()
+    getWeather()
 
 } )
-
-
